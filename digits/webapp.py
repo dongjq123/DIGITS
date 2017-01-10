@@ -21,7 +21,7 @@ app.config['DEBUG'] = True
 # Disable CSRF checking in WTForms
 app.config['WTF_CSRF_ENABLED'] = False
 # This is still necessary for SocketIO
-app.config['SECRET_KEY'] = os.urandom(12).encode('hex')
+app.config['SECRET_KEY'] = codecs.encode(os.urandom(12), 'hex_codec')
 app.url_map.redirect_defaults = False
 socketio = SocketIO(app, async_mode='gevent')
 app.config['store_cache'] = StoreCache()
