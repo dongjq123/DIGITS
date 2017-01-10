@@ -4,7 +4,10 @@ from collections import Counter
 import os.path
 import shutil
 import tempfile
-import Queue
+try:
+    import Queue
+except:
+    from multiprocessing import Queue
 
 import nose.tools
 import numpy as np

@@ -6,7 +6,10 @@ from collections import Counter
 import logging
 import math
 import os
-import Queue
+try:
+    import Queue
+except:
+    from multiprocessing import Queue
 import random
 import re
 import shutil
@@ -18,7 +21,10 @@ import time
 try:
     from cStringIO import StringIO
 except ImportError:
-    from StringIO import StringIO
+    try:
+        from StringIO import StringIO
+    except:
+        from io import StringIO
 
 import h5py
 import lmdb

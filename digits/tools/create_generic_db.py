@@ -12,7 +12,11 @@ import logging
 import numpy as np
 import os
 import PIL.Image
-import Queue
+try:
+    import Queue
+except:
+    from multiprocessing import Queue
+
 import sys
 import threading
 

@@ -492,7 +492,7 @@ def iterate_over_form(job, form, function, prefix=['form'], indent=''):
         if hasattr(attr, 'data') and hasattr(attr, 'type'):
             if (isinstance(attr.data, int) or
                 isinstance(attr.data, float) or
-                isinstance(attr.data, basestring) or
+                isinstance(attr.data, str) or
                     attr.type in whitelist_fields):
                 key = '%s.%s.data' % ('.'.join(prefix), attr_name)
                 warnings |= function(job, attr, key, attr.data)
@@ -512,7 +512,7 @@ def set_data(job, form, key, value):
         job.form_data = dict()
     job.form_data[key] = value
 
-    if isinstance(value, basestring):
+    if isinstance(value, str):
         value = '\'' + value + '\''
     return False
 
