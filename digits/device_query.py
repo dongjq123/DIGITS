@@ -217,7 +217,7 @@ def get_devices(force_reload=False):
         if rc == 0:
             pciBusID_str = ' ' * 16
             # also save the string representation of the PCI bus ID
-            rc = cudart.cudaDeviceGetPCIBusId(ctypes.c_char_p(pciBusID_str.encode()), 16, x)
+            rc = cudart.cudaDeviceGetPCIBusId(ctypes.c_char_p(pciBusID_str), 16, x)
             if rc == 0:
                 properties.pciBusID_str = pciBusID_str.encode()
             devices.append(properties)

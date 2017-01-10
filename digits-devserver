@@ -3,4 +3,4 @@
 
 set -e
 
-python3 -m digits $@
+python -m digits $@
