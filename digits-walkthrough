@@ -9,7 +9,10 @@ import requests
 import socket
 import sys
 import time
-from urlparse import urlparse
+try:
+	from urlparse import urlparse
+except:
+	from urllib.parse import urlparse
 
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
