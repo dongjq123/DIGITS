@@ -767,5 +767,5 @@ def on_leave_jobs():
     if 'room' in flask.session:
         room = flask.session['room']
         del flask.session['room']
-        # print '>>> Somebody left room %s' % room
+        # print('>>> Somebody left room %s' % room)
         leave_room(room)
