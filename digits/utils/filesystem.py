@@ -82,9 +82,11 @@ def dir_hash(dir_name):
                 # Skip if the file is hidden
                 if not f.startswith('.') and not re.search(r'/\.', f):
                     # Change the hash if the file name changes
-                    file_name = os.path.join(root, f)
-                    md5.update(hashlib.md5(file_name).hexdigest().encode())
+                    file_name = os.path.join(root, f).encode('utf-8')
+                    tmp1 = hashlib.md5(file_name).hexdigest().encode('utf-8')
+                    md5.update(tmp1)
                     # Change the hash if the file content changes
                     data = open(file_name, 'rb').read()
-                    md5.update(hashlib.md5(data).hexdigest().encode())
+                    tmp2 = hashlib.md5(data).hexdigest().encode('utf-8')
+                    md5.update(tmp2)
     return md5.hexdigest()
