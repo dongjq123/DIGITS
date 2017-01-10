@@ -215,11 +215,10 @@ def get_devices(force_reload=False):
         properties = c_cudaDeviceProp()
         rc = cudart.cudaGetDeviceProperties(ctypes.byref(properties), x)
         if rc == 0:
-            pciBusID_str = ' ' * 16
-            # also save the string representation of the PCI bus ID
-            rc = cudart.cudaDeviceGetPCIBusId(ctypes.c_char_p(pciBusID_str), 16, x)
+            pciBusID_str = ctypes.create_string_buffer(16)
+            rc = cudart.cudaDeviceGetPCIBusId(pciBusID_str, 16, x)
             if rc == 0:
-                properties.pciBusID_str = pciBusID_str.encode()
+                properties.pciBusID_str = pciBusID_str.value
             devices.append(properties)
         else:
             print('cudaGetDeviceProperties() failed with error #%s' % rc)
