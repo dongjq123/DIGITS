@@ -82,7 +82,7 @@ def username_decorator(f):
         return f(*args, **kwargs)
     return decorated
 
-for endpoint, function in app.view_functions.iteritems():
+for endpoint, function in app.view_functions.items():
     app.view_functions[endpoint] = username_decorator(function)
 
 # Setup the environment
