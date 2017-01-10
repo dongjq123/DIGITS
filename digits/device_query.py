@@ -140,14 +140,14 @@ def get_cudart():
             if cudart is not None:
                 return cudart
     elif platform.system() == 'Darwin':
-        for major in xrange(9, 5, -1):
+        for major in range(9, 5, -1):
             for minor in (5, 0):
                 cudart = get_library('libcudart.%d.%d.dylib' % (major, minor))
                 if cudart is not None:
                     return cudart
         return get_library('libcudart.dylib')
     else:
-        for major in xrange(9, 5, -1):
+        for major in range(9, 5, -1):
             for minor in (5, 0):
                 cudart = get_library('libcudart.so.%d.%d' % (major, minor))
                 if cudart is not None:
@@ -211,15 +211,15 @@ def get_devices(force_reload=False):
         return []
 
     # query devices
-    for x in xrange(num_devices.value):
+    for x in range(num_devices.value):
         properties = c_cudaDeviceProp()
         rc = cudart.cudaGetDeviceProperties(ctypes.byref(properties), x)
         if rc == 0:
             pciBusID_str = ' ' * 16
             # also save the string representation of the PCI bus ID
-            rc = cudart.cudaDeviceGetPCIBusId(ctypes.c_char_p(pciBusID_str), 16, x)
+            rc = cudart.cudaDeviceGetPCIBusId(ctypes.c_char_p(pciBusID_str.encode()), 16, x)
             if rc == 0:
-                properties.pciBusID_str = pciBusID_str
+                properties.pciBusID_str = pciBusID_str.encode()
             devices.append(properties)
         else:
             print('cudaGetDeviceProperties() failed with error #%s' % rc)
