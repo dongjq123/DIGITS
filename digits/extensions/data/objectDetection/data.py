@@ -5,7 +5,10 @@ import csv
 import operator
 import os
 import random
-import StringIO
+try:
+	import StringIO
+except:
+	from io import StringIO
 
 import numpy as np
 
