@@ -56,8 +56,8 @@ def from_folders(job, form):
         folder=form.folder_train.data,
         percent_val=percent_val,
         percent_test=percent_test,
-        min_per_category=min_per_class if min_per_class > 0 else 1,
-        max_per_category=max_per_class if max_per_class > 0 else None
+        min_per_category=min_per_class if min_per_class is None or min_per_class > 0 else 1,
+        max_per_category=max_per_class if max_per_class is None or max_per_class > 0 else None
     )
     job.tasks.append(parse_train_task)
 
