@@ -5,10 +5,14 @@ import csv
 import operator
 import os
 import random
+# Find the best implementation available
 try:
-	import StringIO
-except:
-	from io import StringIO
+    from cStringIO import StringIO
+except ImportError:
+	try:
+		from StringIO import StringIO
+	except ImportError:
+		from io import StringIO
 
 import numpy as np
 
