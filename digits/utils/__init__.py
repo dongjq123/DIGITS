@@ -86,7 +86,7 @@ def subclass(cls):
     Verify all @override methods
     Use a class decorator to find the method's class
     """
-    for name, method in cls.__dict__.iteritems():
+    for name, method in cls.__dict__.items():
         if hasattr(method, 'override'):
             found = False
             for base_class in inspect.getmro(cls)[1:]:
