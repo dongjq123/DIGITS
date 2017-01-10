@@ -7,7 +7,7 @@ import logging
 import math
 import os
 try:
-    import Queue
+    from Queue import Queue
 except:
     from multiprocessing import Queue
 import random
@@ -18,13 +18,7 @@ import threading
 import time
 
 # Find the best implementation available
-try:
-    from cStringIO import StringIO
-except ImportError:
-    try:
-        from StringIO import StringIO
-    except:
-        from io import StringIO
+from io import BytesIO
 
 import h5py
 import lmdb
@@ -269,7 +263,7 @@ def create_db(input_file, output_dir,
 
     # Load lines from input_file into a load_queue
 
-    load_queue = Queue.Queue()
+    load_queue = Queue()
     image_count = _fill_load_queue(input_file, load_queue, shuffle)
 
     # Start some load threads
@@ -278,10 +272,10 @@ def create_db(input_file, output_dir,
                                        bool(backend == 'hdf5'), kwargs.get('hdf5_dset_limit'),
                                        image_channels, image_height, image_width)
     num_threads = _calculate_num_threads(batch_size, shuffle)
-    write_queue = Queue.Queue(2 * batch_size)
-    summary_queue = Queue.Queue()
+    write_queue = Queue(2 * batch_size)
+    summary_queue = Queue()
 
-    for _ in xrange(num_threads):
+    for _ in range(num_threads):
         p = threading.Thread(target=_load_thread,
                              args=(load_queue, write_queue, summary_queue,
                                    image_width, image_height, image_channels,
@@ -648,7 +642,7 @@ def _array_to_datum(image, label, encoding):
         datum.width = image.shape[1]
         datum.label = label
 
-        s = StringIO()
+        s = BytesIO()
         if encoding == 'png':
             PIL.Image.fromarray(image).save(s, format='PNG')
         elif encoding == 'jpg':
