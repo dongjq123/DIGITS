@@ -1,5 +1,6 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # Copyright (c) 2014-2016, NVIDIA CORPORATION.  All rights reserved.
+from __future__ import print_function
 
 import argparse
 import json
@@ -143,7 +144,7 @@ def create_model(driver, name, dataset_name, test_image):
         # driver.refresh()
 
     # test image
-    print 'Testing...'
+    print('Testing...')
     image_path = driver.find_element_by_name('image_url')
     image_path.send_keys(test_image)
     wait()
@@ -196,7 +197,7 @@ def main(argv):
 
     # Start selenium driver.
     driver = webdriver.Firefox()
-    print 'Firefox webdriver started.'
+    print('Firefox webdriver started.')
     mouse = webdriver.ActionChains(driver)
 
     try:
@@ -204,15 +205,15 @@ def main(argv):
 
         get_page(driver, home_page)
 
-        print 'Creating dataset...'
+        print('Creating dataset...')
         create_dataset(driver, dataset_name, dataset_path)
 
         get_page(driver, home_page)
 
-        print 'Creating model...'
+        print('Creating model...')
         create_model(driver, model_name, dataset_name, test_image)
 
-        print 'Done.'
+        print('Done.')
 
         # display an alert message
         get_page(driver, "javascript:alert('Completed Walkthrough!');void(0);")
@@ -224,7 +225,7 @@ def main(argv):
             try:
                 get_page(driver, "javascript:console.log('Waiting...');void(0);")
             except Exception as e:
-                print e
+                print(e)
                 break
             wait()
 
