@@ -1,5 +1,5 @@
 # Copyright (c) 2014-2016, NVIDIA CORPORATION.  All rights reserved.
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
 
 import itertools
 import json
@@ -227,7 +227,7 @@ class BaseViewsTestWithDataset(BaseViewsTest,
 
         if request_json:
             if rv.status_code != 200:
-                print json.loads(rv.data)
+                print(json.loads(rv.data))
                 raise RuntimeError('Model creation failed with %s' % rv.status_code)
             data = json.loads(rv.data)
             if 'jobs' in data.keys():
@@ -237,13 +237,13 @@ class BaseViewsTestWithDataset(BaseViewsTest,
 
         # expect a redirect
         if not 300 <= rv.status_code <= 310:
-            print 'Status code:', rv.status_code
+            print('Status code:', rv.status_code)
             s = BeautifulSoup(rv.data, 'html.parser')
             div = s.select('div.alert-danger')
             if div:
-                print div[0]
+                print(div[0])
             else:
-                print rv.data
+                print(rv.data)
             raise RuntimeError('Failed to create dataset - status %s' % rv.status_code)
 
         job_id = cls.job_id_from_response(rv)
@@ -1209,22 +1209,23 @@ layer {
     def write_python_layer_script(self, filename):
         with open(filename, 'w') as f:
             f.write("""\
+from __future__ import print_function
 import caffe
 import numpy as np
 
 class PythonLayer(caffe.Layer):
 
     def setup(self, bottom, top):
-        print 'PythonLayer::setup'
+        print('PythonLayer::setup')
         if len(bottom) != 1:
             raise Exception("Need one input.")
 
     def reshape(self, bottom, top):
-        print 'PythonLayer::reshape'
+        print('PythonLayer::reshape')
         top[0].reshape(1)
 
     def forward(self, bottom, top):
-        print 'PythonLayer::forward'
+        print('PythonLayer::forward')
         top[0].data[...] = np.sum(bottom[0].data) / 2. / bottom[0].num
 """)
 

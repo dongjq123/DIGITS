@@ -9,7 +9,10 @@ import os
 import pkg_resources
 import platform
 from random import uniform
-from urlparse import urlparse
+try:
+	from urlparse import urlparse
+except:
+	from urllib.parse import urlparse
 
 if not platform.system() == 'Windows':
     import fcntl

@@ -1,5 +1,5 @@
 # Copyright (c) 2014-2016, NVIDIA CORPORATION.  All rights reserved.
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
 
 from collections import OrderedDict
 import copy
@@ -1137,7 +1137,7 @@ class CaffeTrainTask(TrainTask):
             # return the last 20 lines
             self.traceback = '\n'.join(lines[len(lines) - 20:])
             if 'DIGITS_MODE_TEST' in os.environ:
-                print output
+                print(output)
 
     # TrainTask overrides
 
@@ -1201,7 +1201,7 @@ class CaffeTrainTask(TrainTask):
                 epoch = round(epoch, 3)
                 # if epoch is int
                 if epoch == math.ceil(epoch):
-                    # print epoch,math.ceil(epoch),int(epoch)
+                    # print(epoch,math.ceil(epoch),int(epoch))
                     epoch = int(epoch)
                 snapshots.append((
                     os.path.join(snapshot_dir, filename),
@@ -1219,7 +1219,7 @@ class CaffeTrainTask(TrainTask):
 
         # delete all but the most recent solverstate
         for filename, iteration in sorted(solverstates, key=lambda tup: tup[1])[:-1]:
-            # print 'Removing "%s"' % filename
+            # print('Removing "%s"' % filename)
             os.remove(filename)
 
         self.snapshots = sorted(snapshots, key=lambda tup: tup[1])
@@ -1472,7 +1472,7 @@ class CaffeTrainTask(TrainTask):
             else:
                 for name, blob in output.iteritems():
                     outputs[name] = np.vstack((outputs[name], blob))
-            print 'Processed %s/%s images' % (len(outputs[outputs.keys()[0]]), len(caffe_images))
+            print('Processed %s/%s images' % (len(outputs[outputs.keys()[0]]), len(caffe_images)))
 
         return outputs
 

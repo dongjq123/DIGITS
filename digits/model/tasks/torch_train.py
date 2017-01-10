@@ -1,5 +1,5 @@
 # Copyright (c) 2014-2016, NVIDIA CORPORATION.  All rights reserved.
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
 
 import operator
 import os
@@ -481,7 +481,7 @@ class TorchTrainTask(TrainTask):
                 self.traceback = traceback
 
             if 'DIGITS_MODE_TEST' in os.environ:
-                print output
+                print(output)
 
     @override
     def detect_snapshots(self):

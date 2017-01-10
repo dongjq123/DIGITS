@@ -1,10 +1,10 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # Copyright (c) 2015-2016, NVIDIA CORPORATION.  All rights reserved.
 """
 Functions for creating temporary LMDBs
 Used in test_views
 """
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
 
 import argparse
 import os
@@ -193,12 +193,12 @@ if __name__ == '__main__':
     args = vars(parser.parse_args())
 
     if os.path.exists(args['folder']):
-        print 'ERROR: Folder already exists'
+        print('ERROR: Folder already exists')
         sys.exit(1)
     else:
         os.makedirs(args['folder'])
 
-    print 'Creating images at "%s" ...' % args['folder']
+    print('Creating images at "%s" ...' % args['folder'])
 
     start_time = time.time()
 
@@ -208,4 +208,4 @@ if __name__ == '__main__':
                  image_count=args['image_count'],
                  )
 
-    print 'Done after %s seconds' % (time.time() - start_time,)
+    print('Done after %s seconds' % (time.time() - start_time,))

@@ -1,4 +1,5 @@
 # Copyright (c) 2015-2016, NVIDIA CORPORATION.  All rights reserved.
+from __future__ import print_function
 
 import argparse
 import sys
@@ -48,7 +49,7 @@ if __name__ == '__main__':
             clean=args['clean'])
         d.getData()
     else:
-        print 'Unknown dataset "%s"' % args['dataset']
+        print('Unknown dataset "%s"' % args['dataset'])
         sys.exit(1)
 
-    print 'Done after %s seconds.' % (time.time() - start)
+    print('Done after %s seconds.' % (time.time() - start))

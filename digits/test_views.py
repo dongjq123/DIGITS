@@ -5,7 +5,10 @@ import json
 import time
 import urllib
 
-from urlparse import urlparse
+try:
+	from urlparse import urlparse
+except:
+	from urllib.parse import urlparse
 
 from . import test_utils
 from . import webapp

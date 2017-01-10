@@ -1,4 +1,5 @@
 # Copyright (c) 2015-2016, NVIDIA CORPORATION.  All rights reserved.
+from __future__ import print_function
 
 import gzip
 import os
@@ -35,7 +36,7 @@ class MnistDownloader(DataDownloader):
             assert os.path.exists(zipped_path), 'Expected "%s" to exist' % zipped
             unzipped_path = os.path.join(self.outdir, unzipped)
             if not os.path.exists(unzipped_path):
-                print "Uncompressing file=%s ..." % zipped
+                print("Uncompressing file=%s ..." % zipped)
                 with gzip.open(zipped_path) as infile, open(unzipped_path, 'wb') as outfile:
                     outfile.write(infile.read())
 
@@ -68,7 +69,7 @@ class MnistDownloader(DataDownloader):
         """
         Returns a list of ints
         """
-        print 'Reading labels from %s ...' % filename
+        print('Reading labels from %s ...' % filename)
         labels = []
         with open(filename, 'rb') as infile:
             infile.read(4)  # ignore magic number
@@ -83,7 +84,7 @@ class MnistDownloader(DataDownloader):
         """
         Returns a list of PIL.Image objects
         """
-        print 'Reading images from %s ...' % filename
+        print('Reading images from %s ...' % filename)
         images = []
         with open(filename, 'rb') as infile:
             infile.read(4)  # ignore magic number
