@@ -2,17 +2,7 @@
 
 DIGITS is open-source, under the 3-clause BSD license (see [LICENSE](LICENSE)).
 
-We welcome your suggestions and feedback!
-
-## Mailing list
-
-**Before creating an issue on GitHub**, check to see if you should be using the [mailing list](https://groups.google.com/d/forum/digits-users) instead.
-The mailing list is for questions relating to:
-
-* Problems installing DIGITS or its dependencies
-* Understanding how to use a feature in DIGITS
-
-Please go to https://groups.google.com/d/forum/digits-users and create a "New Question".
+We welcome your suggestions and feedback
 
 ## Issue tracker
 
@@ -21,9 +11,9 @@ The [issue tracker](https://github.com/NVIDIA/DIGITS/issues) on GitHub is for:
 * Suggesting an improvement to the documentation
 * Requesting a new feature
 * Reporting a bug
-  * Please provide as much detail as possible about how others can reproduce the bug.
+* Please provide as much detail as possible about how others can reproduce the bug.
 
-Go to https://github.com/NVIDIA/DIGITS/issues and create a "New Issue".
+Go to https://github.com/jed-frey/DIGITS/issues and create a "New Issue".
 
 ## Pull requests
 

@@ -1,6 +1,45 @@
-# DIGITS
+# DIGITS Python3
 
-[![Build Status](https://travis-ci.org/NVIDIA/DIGITS.svg?branch=master)](https://travis-ci.org/NVIDIA/DIGITS)
+My attempt at updating [NVIDIA DIGITS](https://github.com/NVIDIA/DIGITS/) for Python 3 compatibility. 
+
+[Python 2.7 will not be maintained past 2020.](https://pythonclock.org/). Starting new projects in Python 2.7 is just asking for techinical debt you don't need.
+
+## Install instructions.
+
+Tested on Ubuntu 16.04. But should work on in environment DIGITS and Python3 works.
+
+Clone this project:
+
+    git clone https://github.com/jed-frey/DIGITS.git ~/DIGITS
+
+To keep my OS's Python environment clean I prefer to work in [Virtual Environments](http://docs.python-guide.org/en/latest/dev/virtualenvs/). Create a Python 3 virtual environment called ```digits_venv3``` & activate it.
+
+	VENV=digits_venv3
+    virtualenv --python=$(which python3) ~/${VENV}
+    source ~/${VENV}/bin/activate
+    
+Setup DIGITS
+
+    cd ~/DIGITS
+    pip install -r requirements.txt
+    python setup.py build
+    python setup.py develop
+    
+Run Digits.
+
+	digits-devserver
+	
+or
+
+	digits-devserver --debug
+
+## Issues
+
+It doesn't work just yet. No fancy mailing list, just use the issues list as it was intended.
+
+https://github.com/jed-frey/DIGITS/issues
+
+# NVIDIA DIGITS ReadMe
 
 DIGITS (the **D**eep Learning **G**PU **T**raining **S**ystem) is a webapp for training deep learning models.
 
