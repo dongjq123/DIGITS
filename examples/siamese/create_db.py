@@ -4,6 +4,7 @@
 Functions for creating temporary LMDBs
 Used in test_views
 """
+from __future__ import print_function
 
 import argparse
 import os
