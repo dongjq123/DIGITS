@@ -8,14 +8,11 @@ My attempt at updating [NVIDIA DIGITS](https://github.com/NVIDIA/DIGITS/) for Py
 
 Tested on Ubuntu 16.04. But should work on in environment DIGITS and Python3 works.
 
-To keep my OS's Python environment clean I prefer to work in [Virtual Environments](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
-
 Clone this project:
 
     git clone https://github.com/jed-frey/DIGITS.git ~/DIGITS
 
-
-Create a Python 3 virtual environment called ```digits_venv3``` & activate it.
+To keep my OS's Python environment clean I prefer to work in [Virtual Environments](http://docs.python-guide.org/en/latest/dev/virtualenvs/). Create a Python 3 virtual environment called ```digits_venv3``` & activate it.
 
 	VENV=digits_venv3
     virtualenv --python=$(which python3) ~/${VENV}
@@ -32,8 +29,9 @@ Run Digits.
 
 	digits-devserver
 	
-	digits-devserver --debug
+or
 
+	digits-devserver --debug
 
 ## Issues
 
