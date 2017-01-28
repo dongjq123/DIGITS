@@ -131,13 +131,7 @@ def create():
     add_learning_rate = len(form.learning_rate.data) > 1
 
     # Add swept batch_size
-    for bs in form.batch_size.data:
-        print(bs)
-    for s in sweeps[:]:
-        print(s)
-    print(sweeps)
-    # TODO: What does this do?
-    sweeps = [dict(s.items() + [('batch_size', bs)]) for bs in form.batch_size.data for s in sweeps[:]]
+    sweeps = [dict(list(s.items()) + [('batch_size', bs)]) for bs in form.batch_size.data for s in sweeps[:]]
     add_batch_size = len(form.batch_size.data) > 1
     n_jobs = len(sweeps)
 
