@@ -109,7 +109,7 @@ class TrainTask(Task):
             if vl:
                 state['val_outputs']['epoch'] = NetworkOutput('Epoch', [x[0] for x in vl])
                 if va:
-                    state['val_outputs']['accuracy'] = NetworkOutput('Accuracy', [x[1] / 100 for x in va])
+                    state['val_outputs']['accuracy'] = NetworkOutput('Accuracy', [int(x[1] / 100) for x in va])
                 state['val_outputs']['loss'] = NetworkOutput('SoftmaxWithLoss', [x[1] for x in vl])
 
         if state['use_mean'] is True:
@@ -241,7 +241,7 @@ class TrainTask(Task):
             return
 
         self.current_epoch = epoch
-        self.progress = epoch / self.train_epochs
+        self.progress = int(epoch / self.train_epochs)
         self.emit_progress_update()
 
     def save_train_output(self, *args):
@@ -554,7 +554,7 @@ class TrainTask(Task):
         if self.val_outputs and 'epoch' in self.val_outputs:
             if cull:
                 # max 200 data points
-                stride = max(len(self.val_outputs['epoch'].data) / 100, 1)
+                stride = int(max(len(self.val_outputs['epoch'].data) / 100, 1))
             else:
                 # return all data
                 stride = 1
