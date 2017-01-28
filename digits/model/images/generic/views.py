@@ -773,8 +773,7 @@ def get_datasets(extension_id):
         jobs = [j for j in scheduler.jobs.values()
                 if (isinstance(j, GenericImageDatasetJob) or isinstance(j, GenericDatasetJob))
                 and (j.status.is_running() or j.status == Status.DONE)]
-    return [(j.id(), j.name())
-            for j in sorted(jobs, cmp=lambda x, y: cmp(y.id(), x.id()))]
+    return [(j.id(), j.name()) for j in sorted(jobs, key=id)]
 
 
 def get_inference_visualizations(dataset, inputs, outputs):
@@ -821,7 +820,7 @@ def get_inference_visualizations(dataset, inputs, outputs):
 def get_previous_networks():
     return [(j.id(), j.name()) for j in sorted(
         [j for j in scheduler.jobs.values() if isinstance(j, GenericImageModelJob)],
-        cmp=lambda x, y: cmp(y.id(), x.id())
+        key=id
     )
     ]
 
@@ -829,7 +828,7 @@ def get_previous_networks():
 def get_previous_networks_fulldetails():
     return [(j) for j in sorted(
         [j for j in scheduler.jobs.values() if isinstance(j, GenericImageModelJob)],
-        cmp=lambda x, y: cmp(y.id(), x.id())
+        key=id
     )
     ]
 
@@ -849,7 +848,7 @@ def get_previous_network_snapshots():
 def get_pretrained_networks():
     return [(j.id(), j.name()) for j in sorted(
         [j for j in scheduler.jobs.values() if isinstance(j, PretrainedModelJob)],
-        cmp=lambda x, y: cmp(y.id(), x.id())
+        key=id
     )
     ]
 
@@ -857,7 +856,7 @@ def get_pretrained_networks():
 def get_pretrained_networks_fulldetails():
     return [(j) for j in sorted(
         [j for j in scheduler.jobs.values() if isinstance(j, PretrainedModelJob)],
-        cmp=lambda x, y: cmp(y.id(), x.id())
+        key=id
     )
     ]
 
