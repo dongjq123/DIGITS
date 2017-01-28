@@ -10,10 +10,8 @@ import numpy as np
 import PIL.Image
 import os
 import sys
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
+
+from io import BytesIO
 
 # Add path for DIGITS package
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -97,7 +95,7 @@ def infer(input_list,
             datum = caffe_pb2.Datum()
             datum.ParseFromString(value)
             if datum.encoded:
-                s = StringIO()
+                s = BytesIO()
                 s.write(datum.data)
                 s.seek(0)
                 img = PIL.Image.open(s)
