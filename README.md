@@ -4,6 +4,8 @@ My attempt at updating [NVIDIA DIGITS](https://github.com/NVIDIA/DIGITS/) for Py
 
 [Python 2.7 will not be maintained past 2020.](https://pythonclock.org/). Starting new projects in Python 2.7 is just asking for techinical debt you don't need.
 
+![](https://i.imgflip.com/1ijd96.jpg)
+
 ## Install instructions.
 
 Tested on Ubuntu 16.04. But should work on in environment DIGITS and Python3 works.
