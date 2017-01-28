@@ -388,16 +388,19 @@ class MultiNumberRange(object):
         are provided depending on the existence of min and max.
     """
 
-    def __init__(self, min=None, max=None, min_inclusive=True, max_inclusive=True, message=None):
-        self.min = min
-        self.max = max
+    def __init__(self, _min=None, _max=None, min_inclusive=True, max_inclusive=True, message=None):
+        self.min = _min
+        self.max = _max
         self.message = message
         self.min_inclusive = min_inclusive
         self.max_inclusive = max_inclusive
 
     def __call__(self, form, field):
+        print(field.data)
         fdata = field.data if isinstance(field.data, (list, tuple)) else [field.data]
+        print(fdata)
         for data in fdata:
+            print(data)
             flags = 0
             flags |= (data is None) << 0
             flags |= (self.min is not None and self.min_inclusive and data < self.min) << 1
