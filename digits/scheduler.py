@@ -301,28 +301,28 @@ class Scheduler:
         """a query utility"""
         return sorted(
             [j for j in self.jobs.values() if isinstance(j, DatasetJob) and j.status.is_running()],
-            cmp=lambda x, y: cmp(y.id(), x.id())
+            key=id
         )
 
     def completed_dataset_jobs(self):
         """a query utility"""
         return sorted(
             [j for j in self.jobs.values() if isinstance(j, DatasetJob) and not j.status.is_running()],
-            cmp=lambda x, y: cmp(y.id(), x.id())
+            key=id
         )
 
     def running_model_jobs(self):
         """a query utility"""
         return sorted(
             [j for j in self.jobs.values() if isinstance(j, ModelJob) and j.status.is_running()],
-            cmp=lambda x, y: cmp(y.id(), x.id())
+            key=id
         )
 
     def completed_model_jobs(self):
         """a query utility"""
         return sorted(
             [j for j in self.jobs.values() if isinstance(j, ModelJob) and not j.status.is_running()],
-            cmp=lambda x, y: cmp(y.id(), x.id())
+            key=id
         )
 
     def start(self):

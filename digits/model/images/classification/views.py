@@ -696,7 +696,7 @@ def get_datasets():
     return [(j.id(), j.name()) for j in sorted(
         [j for j in scheduler.jobs.values() if isinstance(j, ImageClassificationDatasetJob)
          and (j.status.is_running() or j.status == Status.DONE)],
-        cmp=lambda x, y: cmp(y.id(), x.id())
+        key=id
     )
     ]
 
@@ -716,7 +716,7 @@ def get_default_standard_network():
 def get_previous_networks():
     return [(j.id(), j.name()) for j in sorted(
         [j for j in scheduler.jobs.values() if isinstance(j, ImageClassificationModelJob)],
-        cmp=lambda x, y: cmp(y.id(), x.id())
+        key=id
     )
     ]
 
@@ -724,7 +724,7 @@ def get_previous_networks():
 def get_previous_networks_fulldetails():
     return [(j) for j in sorted(
         [j for j in scheduler.jobs.values() if isinstance(j, ImageClassificationModelJob)],
-        cmp=lambda x, y: cmp(y.id(), x.id())
+        key=id
     )
     ]
 
@@ -744,7 +744,7 @@ def get_previous_network_snapshots():
 def get_pretrained_networks():
     return [(j.id(), j.name()) for j in sorted(
         [j for j in scheduler.jobs.values() if isinstance(j, PretrainedModelJob)],
-        cmp=lambda x, y: cmp(y.id(), x.id())
+        key=id
     )
     ]
 
@@ -752,6 +752,6 @@ def get_pretrained_networks():
 def get_pretrained_networks_fulldetails():
     return [(j) for j in sorted(
         [j for j in scheduler.jobs.values() if isinstance(j, PretrainedModelJob)],
-        cmp=lambda x, y: cmp(y.id(), x.id())
+        key=id
     )
     ]
