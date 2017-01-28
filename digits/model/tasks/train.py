@@ -529,7 +529,7 @@ class TrainTask(Task):
         if self.train_outputs and 'epoch' in self.train_outputs:
             if cull:
                 # max 200 data points
-                stride = max(len(self.train_outputs['epoch'].data) / 100, 1)
+                stride = int(max(len(self.train_outputs['epoch'].data) / 100, 1))
             else:
                 # return all data
                 stride = 1
