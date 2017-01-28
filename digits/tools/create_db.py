@@ -662,7 +662,7 @@ def _write_batch_lmdb(db, batch, image_count):
         with db.begin(write=True) as lmdb_txn:
             for i, datum in enumerate(batch):
                 key = '%08d_%d' % (image_count + i, datum.label)
-                lmdb_txn.put(key, datum.SerializeToString())
+                lmdb_txn.put(key.encode("UTF-8"), datum.SerializeToString())
 
     except lmdb.MapFullError:
         # double the map_size
