@@ -523,7 +523,7 @@ def classify_many():
 
     if outputs is not None:
         # convert to class probabilities for viewing
-        last_output_name, last_output_data = outputs.items()[-1]
+        last_output_name, last_output_data = list(outputs.items())[-1]
         if len(last_output_data) < 1:
             raise werkzeug.exceptions.BadRequest(
                 'Unable to classify any image from the file')
