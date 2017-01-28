@@ -1406,7 +1406,7 @@ class CaffeTrainTask(TrainTask):
         std = np.std(data).astype(np.float32)
         y, x = np.histogram(data, bins=20)
         y = list(y.astype(np.float32))
-        ticks = x[[0, len(x) / 2, -1]]
+        ticks = x[[0, int(len(x) / 2), -1]]
         x = [((x[i] + x[i + 1]) / 2.0).astype(np.float32) for i in range(len(x) - 1)]
         ticks = list(ticks.astype(np.float32))
         return (mean, std, [y, x, ticks])

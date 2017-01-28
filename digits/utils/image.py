@@ -397,7 +397,7 @@ def get_layer_vis_square(data,
         if width > 1:
             padsize = 1
             width += 1
-        n = max(max_width / width, 1)
+        n = int(max(max_width / width, 1))
         n *= n
         data = data[:n]
 
