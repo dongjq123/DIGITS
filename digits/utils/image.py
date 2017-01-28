@@ -6,10 +6,7 @@ import os.path
 import requests
 
 # Find the best implementation available
-try:
-    from StringIO import StringIO
-except ImportError:
-    from io import StringIO
+from io import BytesIO
 
 import numpy as np
 import PIL.Image
@@ -316,8 +313,10 @@ def embed_image_html(image):
     else:
         fmt = fmt.lower()
 
-    string_buf = StringIO()
+    string_buf = BytesIO()
     image.save(string_buf, format=fmt)
+    # TODO: Clean this import.
+    import base64
     data = string_buf.getvalue().encode('base64').replace('\n', '')
     return 'data:image/%s;base64,%s' % (fmt, data)
 
