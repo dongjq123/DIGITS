@@ -1474,7 +1474,7 @@ class CaffeTrainTask(TrainTask):
             else:
                 for name, blob in output.items():
                     outputs[name] = np.vstack((outputs[name], blob))
-            print('Processed %s/%s images' % (len(outputs[outputs.keys()[0]]), len(caffe_images)))
+            print('Processed %s/%s images' % (len(outputs[list(outputs.keys())[0]]), len(caffe_images)))
 
         return outputs
 

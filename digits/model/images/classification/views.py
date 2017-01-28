@@ -35,7 +35,7 @@ def read_image_list(image_list, image_folder, num_test_images):
     ground_truths = []
 
     for line in image_list.readlines():
-        line = line.strip()
+        line = line.decode().strip()
         if not line:
             continue
 
