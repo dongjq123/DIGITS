@@ -792,5 +792,5 @@ if __name__ == '__main__':
                   hdf5_dset_limit=args['hdf5_dset_limit'],
                   )
     except Exception as e:
-        logger.error('%s: %s' % (type(e).__name__, e.args[0]))
+        logger.error('%s: %s' % (type(e).__name__, e.args[0])
         raise
