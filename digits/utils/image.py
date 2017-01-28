@@ -12,6 +12,9 @@ import numpy as np
 import PIL.Image
 import scipy.misc
 
+# TODO: Clean this import.
+import base64
+
 from . import is_url, HTTP_TIMEOUT, errors
 
 # Library defaults:
@@ -313,11 +316,15 @@ def embed_image_html(image):
     else:
         fmt = fmt.lower()
 
-    string_buf = BytesIO()
-    image.save(string_buf, format=fmt)
-    # TODO: Clean this import.
-    import base64
-    data = string_buf.getvalue().encode('base64').replace('\n', '')
+    # Python 2
+    # string_buf = StringIO()
+    # image.save(string_buf, format=fmt)
+    # data = string_buf.getvalue().encode('base64').replace('\n', '')
+
+    # Python3
+    bytes_buf = BytesIO()
+    image.save(bytes_buf, format=fmt)
+    data = base64.encodebytes(bytes_buf.getvalue()).decode().strip()
     return 'data:image/%s;base64,%s' % (fmt, data)
 
 
