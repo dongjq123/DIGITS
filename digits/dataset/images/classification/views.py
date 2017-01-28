@@ -10,7 +10,7 @@ except ImportError:
 	try:
 		from StringIO import StringIO
 	except ImportError:
-		from io import StringIO
+		from io import BytesIO
 
 
 import caffe_pb2
@@ -395,7 +395,7 @@ def explore():
     else:
         total_entries = task.distribution[str(label)]
 
-    max_page = min((total_entries - 1) / size, page + 5)
+    max_page = int(min((total_entries - 1) / size, page + 5))
     pages = range(min_page, max_page + 1)
     for key, value in reader.entries():
         if count >= page * size:
@@ -403,7 +403,7 @@ def explore():
             datum.ParseFromString(value)
             if label is None or datum.label == label:
                 if datum.encoded:
-                    s = StringIO()
+                    s = BytesIO()
                     s.write(datum.data)
                     s.seek(0)
                     img = PIL.Image.open(s)
