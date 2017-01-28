@@ -177,7 +177,7 @@ def infer(input_list,
     db_outputs = db.create_group("outputs")
     for output_id, output_name in enumerate(outputs.keys()):
         output_data = outputs[output_name]
-        output_key = base64.urlsafe_b64encode(str(output_name))
+        output_key = base64.urlsafe_b64encode(str(output_name).encode())
         dset = db_outputs.create_dataset(output_key, data=output_data)
         # add ID attribute so outputs can be sorted in
         # the order they appear in here
