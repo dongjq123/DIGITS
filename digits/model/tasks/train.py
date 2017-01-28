@@ -495,7 +495,7 @@ class TrainTask(Task):
             return None
 
         # return 100-200 values or fewer
-        stride = max(len(self.train_outputs['epoch'].data) / 100, 1)
+        stride = int(max(len(self.train_outputs['epoch'].data) / 100, 1))
         e = ['epoch'] + self.train_outputs['epoch'].data[::stride]
         lr = ['lr'] + self.train_outputs['learning_rate'].data[::stride]
 
