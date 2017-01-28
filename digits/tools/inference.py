@@ -292,5 +292,5 @@ if __name__ == '__main__':
             args['resize']
         )
     except Exception as e:
-        logger.error('%s: %s' % (type(e).__name__, e.message))
+        logger.error('%s: %s' % (type(e).__name__, e.args[0]))
         raise

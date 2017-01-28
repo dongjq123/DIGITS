@@ -281,7 +281,7 @@ class Encoder(threading.Thread):
                     # write data
                     self.writer.write_batch(data)
             except Exception as e:
-                self.error_queue.put('%s: %s' % (type(e).__name__, e.message))
+                self.error_queue.put('%s: %s' % (type(e).__name__, e.args[0]))
                 raise
 
 
@@ -482,5 +482,5 @@ if __name__ == '__main__':
             args['stage']
         )
     except Exception as e:
-        logger.error('%s: %s' % (type(e).__name__, e.message))
+        logger.error('%s: %s' % (type(e).__name__, e.args[0]))
         raise

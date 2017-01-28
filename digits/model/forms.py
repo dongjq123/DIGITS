@@ -33,7 +33,7 @@ class ModelForm(Form):
             # below function raises a BadNetworkException in case of validation error
             fw.validate_network(field.data)
         except frameworks.errors.BadNetworkError as e:
-            raise validators.ValidationError('Bad network: %s' % e.message)
+            raise validators.ValidationError('Bad network: %s' % e.args[0])
 
     def validate_file_exists(form, field):
         from_client = bool(form.python_layer_from_client.data)

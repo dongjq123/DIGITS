@@ -109,7 +109,7 @@ def analyze_db(database,
     try:
         database = validate_database_path(database)
     except ValueError as e:
-        logger.error(e.message)
+        logger.error(e.args[0])
         return False
 
     reader = DbReader(database)

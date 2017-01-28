@@ -55,15 +55,15 @@ def load_image(path):
             stream = StringIO(r.content)
             image = PIL.Image.open(stream)
         except requests.exceptions.RequestException as e:
-            raise errors.LoadImageError(e.message)
+            raise errors.LoadImageError(e.args[0])
         except IOError as e:
-            raise errors.LoadImageError(e.message)
+            raise errors.LoadImageError(e.args[0])
     elif os.path.exists(path):
         try:
             image = PIL.Image.open(path)
             image.load()
         except IOError as e:
-            raise errors.LoadImageError('IOError: %s' % e.message)
+            raise errors.LoadImageError('IOError: %s' % e.args[0])
     else:
         raise errors.LoadImageError('"%s" not found' % path)
 
