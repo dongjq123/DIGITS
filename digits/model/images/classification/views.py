@@ -417,9 +417,7 @@ def classify_one():
     if inputs is not None and len(inputs['data']) == 1:
         image = utils.image.embed_image_html(inputs['data'][0])
         # convert to class probabilities for viewing
-        print(outputs)
-        print(type(outputs))
-        last_output_name, last_output_data = outputs.items()[-1]
+        last_output_name, last_output_data = list(outputs.items())[-1]
 
         if len(last_output_data) == 1:
             scores = last_output_data[0].flatten()
@@ -661,7 +659,7 @@ def top_n():
     results = None
     if outputs is not None and len(outputs) > 0:
         # convert to class probabilities for viewing
-        last_output_name, last_output_data = outputs.items()[-1]
+        last_output_name, last_output_data = list(outputs.items())[-1]
         scores = last_output_data
 
         if scores is None:
