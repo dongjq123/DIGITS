@@ -70,9 +70,9 @@ def find_executable_in_dir(dirname=None):
     Returns None if not found
     """
     if platform.system() == 'Windows':
-        exe_name = 'caffe.exe'
+        exe_names = ['caffe.exe']
     else:
-        exe_name = 'caffe'
+        exe_names = ['caffe', 'caffe.bin']
 
     if dirname is None:
         dirnames = [path.strip("\"' ") for path in os.environ['PATH'].split(os.pathsep)]
@@ -80,9 +80,10 @@ def find_executable_in_dir(dirname=None):
         dirnames = [dirname]
 
     for dirname in dirnames:
-        path = os.path.join(dirname, exe_name)
-        if os.path.isfile(path) and os.access(path, os.X_OK):
-            return path
+        for exe_name in exe_names:
+            path = os.path.join(dirname, exe_name)
+            if os.path.isfile(path) and os.access(path, os.X_OK):
+                return path
     return None
 
 
