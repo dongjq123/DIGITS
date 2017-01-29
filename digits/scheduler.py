@@ -275,7 +275,7 @@ class Scheduler:
             self.jobs.pop(job_id, None)
             job.abort()
             if os.path.exists(job.dir()):
-                shutil.rmtree(job.dir())
+                shutil.rmtree(job.dir(), ignore_errors=True)
             logger.info('Job deleted.', job_id=job_id)
             from digits.webapp import socketio
             socketio.emit('job update',
@@ -292,7 +292,7 @@ class Scheduler:
         path = os.path.join(config_value('jobs_dir'), job_id)
         path = os.path.normpath(path)
         if os.path.dirname(path) == config_value('jobs_dir') and os.path.exists(path):
-            shutil.rmtree(path)
+            shutil.rmtree(path, ignore_errors=True)
             return True
 
         return False
