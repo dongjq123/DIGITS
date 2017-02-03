@@ -75,8 +75,7 @@ class MnistDownloader(DataDownloader):
             infile.read(4)  # ignore magic number
             count = struct.unpack('>i', infile.read(4))[0]
             data = infile.read(count)
-            for byte in data:
-                label = struct.unpack('>B', byte)[0]
+            for label in data:
                 labels.append(str(label))
         return labels
 

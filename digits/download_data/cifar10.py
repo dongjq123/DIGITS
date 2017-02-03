@@ -1,13 +1,17 @@
 # Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import print_function
 
-import cPickle
+try:
+    import cPickle
+except:
+    import _pickle as cPickle
+
 import os
 import tarfile
 
 import PIL.Image
 
-from downloader import DataDownloader
+from .downloader import DataDownloader
 
 
 class Cifar10Downloader(DataDownloader):

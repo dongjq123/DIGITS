@@ -3,8 +3,9 @@ from __future__ import print_function
 
 import os
 import shutil
-import urllib
 
+#import urllib
+import urllib.request as urllib
 
 class DataDownloader(object):
     """Base class for downloading data and setting it up for DIGITS"""
