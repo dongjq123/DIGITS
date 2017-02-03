@@ -83,7 +83,7 @@ def save_binary(url, file_name, tmp_dir, progress):
 def retrieve_files(url, directory, progress):
     model_url = os.path.join(url, directory)
     tmp_dir = tempfile.mkdtemp()
-    info = json.loads(requests.get(os.path.join(model_url, 'info.json')).content)
+    info = json.loads(requests.get(os.path.join(model_url, 'info.json')).content.decode())
 
     # How many files will we download?
     n_files = 1 + ("model file" in info or "network file" in info) + ("labels file" in info)
@@ -171,7 +171,7 @@ def models():
         try:
             response = requests.get(os.path.join(store_base_url, 'master.json'))
             if response.status_code == 200:
-                json_response = json.loads(response.content)
+                json_response = json.loads(response.content.decode())
                 dirs = json_response['children']
                 msg = json_response['msg']
             else:  # try to retrieve from directory listing
@@ -191,11 +191,11 @@ def models():
             tmp_dict = {'dir_name': subdir}
             response = requests.get(os.path.join(store_base_url, subdir, 'info.json'))
             if response.status_code == 200:
-                tmp_dict['info'] = json.loads(response.content)
+                tmp_dict['info'] = json.loads(response.content.decode())
                 tmp_dict['id'] = str(uuid.uuid4())
             response = requests.get(os.path.join(store_base_url, subdir, 'aux.json'))
             if response.status_code == 200:
-                tmp_dict['aux'] = json.loads(response.content)
+                tmp_dict['aux'] = json.loads(response.content.decode())
             model_list.append(tmp_dict)
         store_info = {'base_url': store_base_url, 'welcome_msg': msg,
                       'model_list': model_list}
