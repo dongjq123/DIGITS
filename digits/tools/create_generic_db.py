@@ -194,7 +194,7 @@ class LmdbWriter(DbWriter):
         try:
             with db.begin(write=True) as lmdb_txn:
                 for key, datum in batch:
-                    lmdb_txn.put(key, datum)
+                    lmdb_txn.put(key.encode(), datum)
         except lmdb.MapFullError:
             # double the map_size
             curr_limit = db.info()['map_size']
@@ -291,16 +291,16 @@ class DbCreator(object):
                   label_encoding,
                   force_same_shape):
         # retrieve itemized list of entries
-        entry_ids = extension.itemize_entries(stage)
+        entry_ids = list(extension.itemize_entries(stage))
         entry_count = len(entry_ids)
-
+        
         if entry_count > 0:
             # create a queue to write errors to
             error_queue = queue.Queue()
 
             # create and fill encoder queue
             encoder_queue = queue.Queue()
-            batch_indices = list(range(0, len(entry_ids), batch_size))
+            batch_indices = list(range(0, entry_count, batch_size))
             for batch in [entry_ids[start:start+batch_size] for start in batch_indices]:
                 # queue this batch
                 encoder_queue.put(batch)
@@ -418,7 +418,6 @@ def create_generic_db(jobs_dir, dataset_id, stage):
     extension_id = dataset.extension_id
     extension_class = extensions.data.get_extension(extension_id)
     extension = extension_class(**dataset.extension_userdata)
-
     # encoding
     feature_encoding = dataset.feature_encoding
     label_encoding = dataset.label_encoding
