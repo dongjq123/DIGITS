@@ -3,13 +3,7 @@ from __future__ import absolute_import
 
 import os
 # Find the best implementation available
-try:
-    from cStringIO import StringIO
-except ImportError:
-	try:
-		from StringIO import StringIO
-	except ImportError:
-		from io import StringIO
+from io import BytesIO
 
 import caffe_pb2
 import flask
@@ -156,7 +150,7 @@ def explore():
             job.extension_userdata[COLOR_PALETTE_ATTRIBUTE]):
         # assume single-channel 8-bit palette
         palette = job.extension_userdata[COLOR_PALETTE_ATTRIBUTE]
-        palette = np.array(palette).reshape((len(palette) / 3, 3)) / 255.
+        palette = np.array(palette).reshape((int(len(palette) / 3), 3)) / 255.
         # normalize input pixels to [0,1]
         norm = mpl.colors.Normalize(vmin=0, vmax=255)
         # create map
@@ -183,7 +177,7 @@ def explore():
             datum.ParseFromString(value)
             if not datum.encoded:
                 raise RuntimeError("Expected encoded database")
-            s = StringIO()
+            s = BytesIO()
             s.write(datum.data)
             s.seek(0)
             img = PIL.Image.open(s)
