@@ -6,11 +6,8 @@ from collections import Counter
 import logging
 import math
 import os
-try:
-    from Queue import Queue
-except:
-    from multiprocessing import Queue
 
+from queue import Queue
 
 import random
 import re
@@ -572,7 +569,7 @@ def _load_thread(load_queue, write_queue, summary_queue,
     while not load_queue.empty():
         try:
             path, label = load_queue.get(True, 0.05)
-        except: #Queue.Empty:
+        except Queue.Empty:
             continue
 
         # prepend path with image_folder, if appropriate

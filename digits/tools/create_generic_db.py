@@ -2,20 +2,14 @@
 # Copyright (c) 2016-2017, NVIDIA CORPORATION.  All rights reserved.
 
 import argparse
-# Find the best implementation available
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
+from io import BytesIO
 import lmdb
 import logging
 import numpy as np
 import os
 import PIL.Image
-try:
-    import Queue
-except:
-    from multiprocessing import Queue
+
+import queue
 
 import sys
 import threading
@@ -40,7 +34,7 @@ class DbWriter(threading.Thread):
 
     def __init__(self, output_dir, total_batches):
         self._dir = output_dir
-        self.write_queue = Queue.Queue(10)
+        self.write_queue = queue.Queue(10)
         # sequence number
         self.seqn = 0
         self.total_batches = total_batches
@@ -68,7 +62,7 @@ class DbWriter(threading.Thread):
         while True:
             try:
                 batch = self.write_queue.get(timeout=0.1)
-            except Queue.Empty:
+            except queue.Empty:
                 if self.done:
                     # break out of main loop and terminate
                     break
@@ -132,7 +126,7 @@ class LmdbWriter(DbWriter):
             if data.shape[2] == 1:
                 # grayscale
                 data = data[:, :, 0]
-            s = StringIO()
+            s = BytesIO()
             if encoding == 'png':
                 PIL.Image.fromarray(data).save(s, format='PNG')
             elif encoding == 'jpg':
@@ -239,7 +233,7 @@ class Encoder(threading.Thread):
             # don't block- if the queue is empty then we're done
             try:
                 batch = self.queue.get_nowait()
-            except Queue.Empty:
+            except queue.Empty:
                 # break out of main loop and terminate
                 break
 
@@ -302,11 +296,11 @@ class DbCreator(object):
 
         if entry_count > 0:
             # create a queue to write errors to
-            error_queue = Queue.Queue()
+            error_queue = queue.Queue()
 
             # create and fill encoder queue
-            encoder_queue = Queue.Queue()
-            batch_indices = range(0, len(entry_ids), batch_size)
+            encoder_queue = queue.Queue()
+            batch_indices = list(range(0, len(entry_ids), batch_size))
             for batch in [entry_ids[start:start+batch_size] for start in batch_indices]:
                 # queue this batch
                 encoder_queue.put(batch)
