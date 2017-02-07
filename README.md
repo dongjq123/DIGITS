@@ -2,7 +2,7 @@
 
 My attempt at updating [NVIDIA DIGITS](https://github.com/NVIDIA/DIGITS/) for Python 3 compatibility. 
 
-[Python 2.7 will not be maintained past 2020.](https://pythonclock.org/). Starting new projects in Python 2.7 is just asking for techinical debt you don't need.
+[Python 2.7 will not be maintained past 2020](https://pythonclock.org/). Starting new projects in Python 2.7 is just asking for techinical debt you don't need.
 
 ## Install instructions.
 
